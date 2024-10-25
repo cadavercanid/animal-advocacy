@@ -70,13 +70,15 @@
         }
 
         .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    display: grid;
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /* Default (desktop) */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    justify-items: center;
+}
 
         .animal-dot {
             display: flex;
@@ -109,21 +111,39 @@
     z-index: 1; 
 }
 
+.grid-container {
+    display: grid;
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /* Default (desktop) */
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    justify-items: center;
+}
+
+/* Mobile layout */
 @media screen and (max-width: 768px) {
-    .selection-number {
-        right: 15px; 
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for mobile */
+        gap: 15px; /* Slightly smaller gap for mobile */
+    }
+
+    .dot {
+        width: 80px; /* Slightly smaller dots for mobile */
+        height: 80px;
+    }
+
+    .animal-icon {
+        width: 45px; /* Slightly smaller icons for mobile */
+        height: 45px;
     }
 }
 
-@media screen and (min-width: 769px) {
-    .dot {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto; 
-    }
-    
-    .animal-dot {
-        padding: 5px; 
+/* Tablet layout */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* Three columns for tablet */
     }
 }
 
