@@ -95,7 +95,7 @@
         .selection-number {
     position: absolute;
     top: -5px;
-    right: -5px; /* Changed from 15px to -5px */
+    right: -5px; 
     width: 24px;
     height: 24px;
     background-color: var(--primary-color);
@@ -106,26 +106,24 @@
     justify-content: center;
     font-weight: bold;
     font-size: 14px;
-    z-index: 1; /* Add this to ensure number appears above dot */
+    z-index: 1; 
 }
 
-/* Add these media queries at the end of your CSS */
 @media screen and (max-width: 768px) {
     .selection-number {
-        right: 15px; /* Original positioning for mobile */
+        right: 15px; 
     }
 }
 
-/* Optional: Adjust dot size for better spacing on larger screens */
 @media screen and (min-width: 769px) {
     .dot {
         width: 100px;
         height: 100px;
-        margin: 0 auto; /* Center the dot */
+        margin: 0 auto; 
     }
     
     .animal-dot {
-        padding: 5px; /* Add some padding around each animal dot */
+        padding: 5px; 
     }
 }
 
@@ -215,7 +213,7 @@
 }
 
 .bobbing-logo {
-    width: 350px; /* Adjust size as needed */
+    width: 350px; 
     height: auto;
     animation: bobbing 2s ease-in-out infinite;
     margin-bottom: -40px;
@@ -244,17 +242,14 @@
     <div class="selection-counter">Selected: <span id="counter">0</span>/3</div>
     
     <div class="grid-container">
-        <!-- Animals will be inserted here by JavaScript -->
     </div>
 
     <button type="button" class="submit-btn" id="submitBtn" disabled>Submit Choices</button>
     <div class="voted-message" id="votedMessage">You have already voted. Thank you for participating!</div>
 
     <script>
-        // Timer functionality
         const HOURS_72 = 72 * 60 * 60 * 1000; // 72 hours in milliseconds
 
-        // Get or set the start time
         let startTime = localStorage.getItem('pollStartTime');
         if (!startTime) {
             startTime = new Date().getTime();
@@ -273,26 +268,21 @@
                 return;
             }
 
-            // Calculate remaining time
             const hours = Math.floor(remaining / (60 * 60 * 1000));
             const minutes = Math.floor((remaining % (60 * 60 * 1000)) / (60 * 1000));
             const seconds = Math.floor((remaining % (60 * 1000)) / 1000);
 
-            // Format the time
             const timeString = `${hours}h ${minutes}m ${seconds}s`;
             document.getElementById('countdown').textContent = timeString;
 
-            // Add urgent styling for last hour
             const countdownElement = document.querySelector('.countdown-timer');
             if (remaining < (60 * 60 * 1000)) { // less than 1 hour
                 countdownElement.classList.add('urgent');
             }
 
-            // If poll is still active, continue countdown
             setTimeout(updateCountdown, 1000);
         }
 
-        // Start the countdown
         updateCountdown();
 
         const animals = [
@@ -335,20 +325,18 @@
             const dots = document.getElementsByClassName('animal-dot');
             Array.from(dots).forEach(dot => {
                 dot.classList.add('disabled');
-                dot.onclick = null; // Remove click handlers
+                dot.onclick = null; 
             });
             document.getElementById('submitBtn').disabled = true;
             document.getElementById('votedMessage').classList.add('visible');
         }
 
-        // Check if user has already voted when page loads
         if (hasUserVoted()) {
             document.addEventListener('DOMContentLoaded', function() {
                 disableVoting();
             });
         }
 
-        // Create animal dots
         const gridContainer = document.querySelector('.grid-container');
         animals.forEach(animal => {
             const animalElement = document.createElement('div');
